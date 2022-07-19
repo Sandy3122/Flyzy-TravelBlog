@@ -22,6 +22,9 @@
    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
    
+   <!-- Sweet Alert -->
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
    <!-- custom css file link  -->
    <link rel="stylesheet" href="/style.css">
 
@@ -35,17 +38,17 @@
    <a href="#" class="logo"><img src="/flyzy.png" alt=""></a>
 
    <nav class="navbar">
-      <a href="/" class="navbarLinks">Home</a>
+      <a href="/home" class="navbarLinks">Home</a>
       <a href="/aboutUs" class="navbarLinks">About Us</a>
-      <a href="/features" class="navbarLinks">Features</a>
       <a href="/careers" class="navbarLinks">Careers</a>
       <div class="dropdown">
          <div><button class="dropbtn">More <i style="font-size:24px; padding-right:6px;" class="fa">&#xf107;</i></button></div>
          <div class="dropdown-content">
+            <a href="/features">Features</a>
            <a href="/gallery">Gallery</a>
            <a href="/packages">Packages</a>
            <a href="/recommended">Recommended Places</a>
-           <a href="/login">Login</a>
+           <!-- <a href="/login">Login</a> -->
          </div>
        </div>
       <a href="/careers#feedback" class="navbarLinks1">Get In Touch</a>
@@ -83,20 +86,20 @@
       </div>
 
       <div class="content3">
-         <form>
+         <form method="post" action="/send">
             <div class="form-group">
-              <input type="text" placeholder="Full Name" class="form-control" required >
+              <input type="text" placeholder="Full Name" name="Name" class="form-control" id="name" required >
             </div>
             <div class="form-group">
-              <input type="email" placeholder="Email" class="form-control" aria-describedby="emailHelp" required>
+              <input type="email" placeholder="Email" name="Email" class="form-control" aria-describedby="emailHelp" id="email" required>
             </div>
             <div class="form-group">
-              <input type="tel" placeholder="Mobile Number" class="form-control" required>
+              <input type="number" placeholder="Mobile Number" maxlength="10" name="MobileNumber" class="form-control" id="number" required>
             </div>
             <div class="form-group">
-               <textarea class="msg" placeholder="Message" class="form-check-input" id="" required ></textarea>
+               <textarea class="msg" placeholder="Your Quires" name="Message" class="form-check-input" id="message" required ></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="/send"><button type="button" onclick="sendReview()" class="btn btn-primary">Submit</button></a>
           </form>
       </div>
     </div>
@@ -173,6 +176,40 @@
 
 <!-- custom js file link  -->
 <script src="/script.js"></script>
+<script>
+   function sendReview(){
+      var name = document.getElementById("name").value;
+      var email = document.getElementById("email").value;
+      var number = document.getElementById("number").value;
+      var message = document.getElementById("message").value;
 
+
+      if(name=='' || email=='' || number=='' || message==''){
+         swal({
+        title: "Fields Empty",
+        text: "Please Check The Missing Fields!",
+        icon: "warning",
+        button: "OK",
+      });
+      return false;
+      }
+      else if(isNaN(number)){
+         swal({
+        title: "Plese Check Input Feild",
+        text: "Enter Only Number",
+        icon: "warning",
+        button: "OK",
+      });
+      return false;
+      };
+      alert("Successfully Submited!")
+      
+   };
+
+   // function sendReview(){
+   //    alert("Successfully Submited!")
+   // }
+
+</script>
 </body>
 </html>

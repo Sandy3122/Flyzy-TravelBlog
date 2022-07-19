@@ -230,7 +230,7 @@ section{
  display: none;
  position: absolute;
  background-color: #f1f1f1;
- min-width: 160px;
+ min-width: 140px;
  margin-top:1px;
  border-radius:6px;
  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -239,8 +239,8 @@ section{
 
 .dropdown-content a {
  color: black;
- padding: 12px 16px;
- font-size:18px;
+ padding: 8px;
+ font-size:12px;
  text-decoration: none;
  border-radius:6px;
  display: block;
@@ -925,7 +925,7 @@ Packages Section Styles
 
 /* Map Section In Recommended Places */
 
-/* .map{
+.map{
    margin-top:20px;
    width:100%;
    height:100vh;
@@ -939,8 +939,7 @@ Packages Section Styles
    margin-top:40px;
    width:80%;
    height:600px;
-   filter:invert(100%);
-} */
+}
 
 
 
@@ -1000,7 +999,10 @@ Packages Section Styles
       top:99%; left:0; right:0;
       background-color: var(--white);
       border-top: var(--border);
-      padding:2rem;
+      padding:2.5rem;
+      width:100%;
+      flex-direction: column;
+      text-align: center;
       transition: .2s linear;
       clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
    }
@@ -1011,7 +1013,8 @@ Packages Section Styles
 
    .header .navbar a{
       display: block;
-      margin:2rem;
+      padding:1.5rem;
+      margin:2.5rem;
       text-align: center;
    }
 
