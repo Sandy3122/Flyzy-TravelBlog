@@ -43,6 +43,7 @@ mongoose
 const connection = mongoose.connection;
 
 // Sessions
+app.use(cookieParser())
 app.use(
   sessions({
     cookieName: "sessions",
@@ -55,22 +56,22 @@ app.use(
 var session;
 
 // apps
-app.get("/", function(req,res) {
-    session=req.session;
-    if(session.user){
-        res.sendFile(__dirname + "/pages/home1.html");
-    }else
-    res.sendFile(__dirname + "/pages/login.html");
-});
-
-// app.get("/", function (req, res) {
-//   res.sendFile(__dirname + "/pages/home.html");
+// app.get("/", function(req,res) {
+//     session=req.session;
+//     if(session.user){
+//         res.sendFile(__dirname + "/pages/home1.html");
+//     }else
+//     res.sendFile(__dirname + "/pages/login.html");
 // });
+
+app.get("/", function (req, res) {
+  res.sendFile(__dirname + "/pages/home.html");
+});
 
 app.get("/home", function (req, res) {
     session=req.session;
     if(session.user){
-        console.log(session.user);
+        // console.log(session.user);
         res.sendFile(__dirname + "/pages/home1.html");
     }else
     res.sendFile(__dirname + "/pages/home.html");
@@ -140,7 +141,7 @@ app.post("/sendData", function (req, res) {
     },
     function (err, docs) {
       if (err || docs == null) {
-        //console.log(err)
+        console.log(err)
         obj.save(function (err, results) {
           if (results) {
             //    console.log("results"+ results);
@@ -160,9 +161,8 @@ app.post("/sendData", function (req, res) {
 //Login Data
 app.post("/loginData", function (req, res) {
   //res.sendFile(__dirname + '/template/signup.html');
-  // session=req.session;
+  session=req.session;
   console.log(req.body);
-
   registrationSchema.findOne(
     { Email: req.body.Email, Password: req.body.Password },
     function (err, docs) {
@@ -171,12 +171,11 @@ app.post("/loginData", function (req, res) {
         res.sendStatus(500);
       } else {
         // session=req.session;
-        // session.user=docs;
         // loginData=docs;
+        session.user=docs;
         res.send(docs);
       }
-    }
-  );
+    })
 });
 
 //Getting Users Data From MongoDB
