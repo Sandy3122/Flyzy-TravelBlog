@@ -15,8 +15,8 @@ app.use(express.static(path.join(__dirname, "js")));
 
 //Importing Schema's
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json()); //this is to accept data in json format
+app.use(express.urlencoded({ extended: false })); //this is basically to decode the data and it will send through html form 
 
 // Importing Schemas
 const registrationSchema = require("./models/registrationSchema");
@@ -220,10 +220,7 @@ app.post("/send", function(req, res){
 
 
 
-
-
-
-
+ 
 // apps From Controllers
 // var webpages = require('./controllers/webPagesControllers.js');
 // app.use('/aboutUs', webpages)
