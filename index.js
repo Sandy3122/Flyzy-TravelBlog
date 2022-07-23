@@ -8,7 +8,7 @@ const bodyparser = require("body-parser");
 const cookieParser = require("cookie-parser");
 var sessions = require("express-session");
 
-// Paths
+// Paths ( This is serve our public folder as a static folder )
 app.use(express.static(path.join(__dirname, "css")));
 app.use(express.static(path.join(__dirname, "images")));
 app.use(express.static(path.join(__dirname, "js")));
@@ -164,7 +164,7 @@ app.post("/loginData", function (req, res) {
   session=req.session;
   console.log(req.body);
   registrationSchema.findOne(
-    { Email: req.body.Email, Password: req.body.Password },
+    {Email: req.body.Email, Password: req.body.Password},
     function (err, docs) {
       if (err || docs == null) {
         //console.log(err)
@@ -205,14 +205,17 @@ const custReviews = {
 }
 const Reviews = mongoose.model("Reviews", custReviews);
 
-app.post("/send", function(req, res){
+app.post("/send", async (req, res)=> {
+  console.log("We are in inside post function");
     let newReviews = new Reviews({
         Name:req.body.Name,
         MobileNumber:req.body.MobileNumber,
         Email:req.body.Email,
         Message:req.body.Message
     });
-    newReviews.save();
+
+    const val = await newReviews.save();
+    // res.json(val);
     res.redirect('/careers')
 
 } )
