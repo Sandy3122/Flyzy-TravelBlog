@@ -3,8 +3,7 @@
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta name="viewport" content="width=device-width, intial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+   <!-- <meta name="viewport" content="width=device-width, intial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"> -->
    <title>Flyzy-Careers</title>
 
    <!-- font awesome cdn link  -->
@@ -32,7 +31,7 @@
 <div class="headers bg-light">
    <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container-fluid">
-        <a href="#" class="navbar-brand logo"><img src="flyzy.png" alt=""></a>
+        <a href="/home" class="navbar-brand logo"><img src="flyzy.png" alt=""></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -90,7 +89,7 @@
       </div>
 
       <div class="content3">
-         <form method="post" action="/send">
+         <form>
             <div class="form-group">
               <input type="text" placeholder="Full Name" name="Name" class="form-control" id="name" required >
             </div>
@@ -103,7 +102,8 @@
             <div class="form-group">
                <textarea class="msg" placeholder="Your Queries" name="Message" class="form-check-input" id="message" required ></textarea>
             </div>
-            <a href="/send"><button type="button" onclick="sendReview()" class="btn btn-primary">Submit</button></a>
+            <a href="/send"><button type="button" class="btn btn-primary">Submit</button></a>
+            <!-- <a href="/send"><button type="button" onclick="sendReview()" class="btn btn-primary">Submit</button></a> -->
           </form>
       </div>
     </div>
@@ -180,7 +180,7 @@
 
 <!-- custom js file link  -->
 <script src="/script.js"></script>
-<script>
+<!-- <script>
    function sendReview(){
       var name = document.getElementById("name").value;
       var email = document.getElementById("email").value;
@@ -214,6 +214,6 @@
    //    alert("Successfully Submited!")
    // }
 
-</script>
+</script> -->
 </body>
 </html>

@@ -205,18 +205,21 @@ const custReviews = {
 }
 const Reviews = mongoose.model("Reviews", custReviews);
 
-app.post("/send", async (req, res)=> {
-  console.log("We are in inside post function");
+app.post("/send", (req, res)=> {
+  // console.log("We are in inside post function");
     let newReviews = new Reviews({
         Name:req.body.Name,
         MobileNumber:req.body.MobileNumber,
         Email:req.body.Email,
         Message:req.body.Message
     });
+    newReviews.save();
+    // console.log(newReviews);
+    res.redirect('/careers#feedback')
 
-    const val = await newReviews.save();
+    // const val = await newReviews.save();
     // res.json(val);
-    res.redirect('/careers')
+    // res.redirect('/careers')
 
 } )
 

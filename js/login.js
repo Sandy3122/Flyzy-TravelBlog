@@ -1,6 +1,15 @@
 function loginValidation() {
   var Email_id = document.getElementById("inputEmail").value;
   var Password = document.getElementById("inputPassword").value;
+  if(Email_id =="" || Password =="") {
+    swal({
+      title: "Fields Empty!",
+      text: "Please Check The Missing Fields!",
+      icon: "warning",
+      button: "OKAY",
+    });
+  }
+
   if (Email_id.length <= 0) {
     // alert("username is required");
     document.getElementById("message1").innerHTML = "!Please enter your email";

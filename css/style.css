@@ -135,7 +135,6 @@ section{
 
 .headers img , .logo{
    width:14rem;
-   length:14rem;
 }
 
 
@@ -942,7 +941,7 @@ Packages Section Styles
 
 }
 
-@media (max-width:768px){
+@media screen and (max-width:768px){
 
    .heading h1{
       font-size: 4rem;
@@ -968,7 +967,8 @@ Packages Section Styles
    }
 
    .earth{
-      margin-top:6rem;
+      margin:6rem 0 0 10rem;
+      
 
    }
 
