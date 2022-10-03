@@ -25,7 +25,7 @@ function loginValidation() {
     };
     console.log(data);
   }
-  fetch("/loginData", {
+  fetch("/loginData",{ 
     method: "POST",
     headers: {
       "Content-Type": "application/json",

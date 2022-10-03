@@ -131,14 +131,7 @@ app.post("/sendData", function (req, res) {
     Password: req.body.Password,
   });
 
-  registrationSchema.findOne(
-    {
-      $or: [
-        { Name: req.body.Name },
-        { MobileNumber: req.body.MobileNumber },
-        { Email: req.body.Email },
-      ],
-    },
+  registrationSchema.findOne({Name: req.body.Name, MobileNumber: req.body.MobileNumber, Email: req.body.Email},
     function (err, docs) {
       if (err || docs == null) {
         console.log(err)
@@ -169,16 +162,15 @@ app.post("/loginData", function (req, res) {
       if (err || docs == null) {
         //console.log(err)
         res.sendStatus(500);
-      } else {
-        // session=req.session;
-        // loginData=docs;
+      } 
+      else{
         session.user=docs;
         res.send(docs);
       }
     })
 });
 
-//Getting Users Data From MongoDB
+// Getting Users Data From MongoDB
 // app.get("/getusers", function (req, res) {
 //   session = req.session;
 //   if (session.user) {
@@ -197,6 +189,9 @@ app.post("/loginData", function (req, res) {
 
 
 //Sending Reviews Data To MongoDB Data Base
+
+
+//Schema For Customer Reviews
 const custReviews = {
     Name: String,
     MobileNumber: String,
@@ -205,31 +200,25 @@ const custReviews = {
 }
 const Reviews = mongoose.model("Reviews", custReviews);
 
-app.post("/send", (req, res)=> {
+app.post("/reviewsData", async(req, res)=> {
   // console.log("We are in inside post function");
+  try{
     let newReviews = new Reviews({
-        Name:req.body.Name,
-        MobileNumber:req.body.MobileNumber,
-        Email:req.body.Email,
-        Message:req.body.Message
-    });
-    newReviews.save();
-    // console.log(newReviews);
-    res.redirect('/careers#feedback')
-
-    // const val = await newReviews.save();
-    // res.json(val);
-    // res.redirect('/careers')
-
-} )
-
+      Name:req.body.Name,
+      MobileNumber:req.body.MobileNumber,
+      Email:req.body.Email,
+      Message:req.body.Message
+  });
+  const result = await newReviews.save()
+  res.send(result);
+  console.log(result)
+  }
+  catch (error) {
+    console.log(error.message);
+  }
+})
 
 
-
- 
-// apps From Controllers
-// var webpages = require('./controllers/webPagesControllers.js');
-// app.use('/aboutUs', webpages)
 
 //listening to the server
 app.listen(8040, () => console.log("Successfully Server Started"));

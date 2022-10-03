@@ -102,7 +102,7 @@
             <div class="form-group">
                <textarea class="msg" placeholder="Your Queries" name="Message" class="form-check-input" id="message" required ></textarea>
             </div>
-            <a href="/send"><button type="button" class="btn btn-primary">Submit</button></a>
+            <a href="/send"><button type="button" onclick="reviews()" class="btn btn-primary">Submit</button></a>
             <!-- <a href="/send"><button type="button" onclick="sendReview()" class="btn btn-primary">Submit</button></a> -->
           </form>
       </div>
@@ -111,13 +111,8 @@
 </div>
 <!-- Home Page Ends -->
 
-
-
-
-
-
 <!-- footer section starts  -->
-
+ 
 <section class="footer">
 
    <div class="box-container">
@@ -179,7 +174,7 @@
 <!-- footer section ends -->
 
 <!-- custom js file link  -->
-<script src="/script.js"></script>
+<!-- <script src="/script.js"></script> -->
 <!-- <script>
    function sendReview(){
       var name = document.getElementById("name").value;
@@ -215,5 +210,38 @@
    // }
 
 </script> -->
+
+
+<script>
+
+   function reviews(){
+      var data = {
+         Name: document.getElementById('name').value,
+         Email: document.getElementById('email').value,
+         MobileNumber: document.getElementById('number').value,
+         Message: document.getElementById('message').value,
+      };
+     fetch('/reviewsData',{
+       method:'POST',
+       headers: {
+         'Content-Type' : 'application/json'
+       },
+       body: JSON.stringify(data)
+     })
+     .then(response => response.json())
+     .then(data => {
+       console.log(data)
+       alert("Your Querie Was Submitted Successfully")
+       window.location.href="/careers#feedback"
+     })
+     .catch((error)=>{
+         alert("Not Valid")
+       })
+ 
+     }
+   
+ </script>
+ 
+
 </body>
 </html>
