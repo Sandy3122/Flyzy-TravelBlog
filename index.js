@@ -4,6 +4,8 @@ var path = require("path");
 app.path = require("path");
 const bodyparser = require("body-parser");
 
+port = 8000
+
 // sessions
 const cookieParser = require("cookie-parser");
 var sessions = require("express-session");
@@ -15,8 +17,8 @@ app.use(express.static(path.join(__dirname, "js")));
 
 //Importing Schema's
 
-app.use(express.json()); //this is to accept data in json format
-app.use(express.urlencoded({ extended: false })); //this is basically to decode the data and it will send through html form 
+app.use(bodyparser.json()); //this is to accept data in json format
+app.use(bodyparser.urlencoded({ extended: false })); //this is basically to decode the data and it will send through html form 
 
 // Importing Schemas
 const registrationSchema = require("./models/registrationSchema");
@@ -25,7 +27,6 @@ const registrationSchema = require("./models/registrationSchema");
 
 // Mongodb Database Connection
 const mongoose = require("mongoose");
-// const urlencoded = require("body-parser/lib/types/urlencoded");
 mongoose
   .connect(
     "mongodb+srv://Sandeep1999:Sandeep3122@sandeep.nlcna.mongodb.net/Flyzy_Travel_Blog?retryWrites=true&w=majority",
@@ -40,7 +41,7 @@ mongoose
   .catch((e) => {
     console.log("Not Connected To MongoDB Database.");
   });
-const connection = mongoose.connection;
+
 
 // Sessions
 app.use(cookieParser())
@@ -63,7 +64,6 @@ var session;
 //     }else
 //     res.sendFile(__dirname + "/pages/login.html");
 // });
-
 app.get("/", function (req, res) {
   res.sendFile(__dirname + "/pages/home.html");
 });
@@ -106,6 +106,8 @@ app.get("/send", function (req, res) {
     res.redirect("/login");
   }
 });
+
+
 app.get("/login", function (req, res) {
   session = req.session;
   if (session.user) {
@@ -170,24 +172,6 @@ app.post("/loginData", function (req, res) {
     })
 });
 
-// Getting Users Data From MongoDB
-// app.get("/getusers", function (req, res) {
-//   session = req.session;
-//   if (session.user) {
-//     registrationSchema.find({ _id: session.user._id }, function (err, result) {
-//       if (err) {
-//         console.log("err");
-//       } else {
-//         // console.log(result);
-//         res.send(result);
-//       }
-//     });
-//   } else {
-//     console.log("err");
-//   }
-// });
-
-
 //Sending Reviews Data To MongoDB Data Base
 
 
@@ -221,4 +205,4 @@ app.post("/reviewsData", async(req, res)=> {
 
 
 //listening to the server
-app.listen(8040, () => console.log("Successfully Server Started"));
+app.listen(port, () => console.log("Successfully Server Started And Listening To Server Port :",port));
